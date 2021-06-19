@@ -20,6 +20,9 @@ void matrix_init_kb(void) {
 	// runs once when the firmware starts up
 
 	matrix_init_user();
+
+    rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+    rgblight_sethsv_range(HSV_GOLD, 0, RGBLED_NUM);
 }
 
 void matrix_scan_kb(void) {
