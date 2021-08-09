@@ -16,48 +16,48 @@
 
 #include "ristretto.h"
 
-enum layers {
-	_BASE,
-	_RAISE,
-	_LOWER,
-	_ADJUST
-};
+// enum layers {
+// 	_BASE,
+// 	_RAISE,
+// 	_LOWER,
+// 	_ADJUST
+// };
 
-bool encoder_update_kb(uint8_t index, bool clockwise) {
-    if (!encoder_update_user(index, clockwise)) { return false; }
-	if(index == 0) {
-		if (clockwise) {
-			tap_code(KC_VOLD);
-		} else {
-			tap_code(KC_VOLU);
-			}
-		}
-	return true;
-}
+// bool encoder_update_kb(uint8_t index, bool clockwise) {
+//     if (!encoder_update_user(index, clockwise)) { return false; }
+// 	if(index == 0) {
+// 		if (clockwise) {
+// 			tap_code(KC_VOLD);
+// 		} else {
+// 			tap_code(KC_VOLU);
+// 			}
+// 		}
+// 	return true;
+// }
 
-#ifdef OLED_ENABLE
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-	return OLED_ROTATION_270;
-}
+// #ifdef OLED_ENABLE
+// oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+// 	return OLED_ROTATION_270;
+// }
 
-__attribute__((weak)) void oled_task_user(void) {
-	oled_write_P(PSTR("\n\n"), false);
-	oled_write_ln_P(PSTR("LAYER"), false);
-	oled_write_ln_P(PSTR(""), false);
-	switch (get_highest_layer(layer_state)) {
-		case _BASE:
-			oled_write_P(PSTR("BASE\n"), false);
-			break;
-		case _RAISE:
-			oled_write_P(PSTR("RAISE\n"), false);
-			break;
-		case _LOWER:
-			oled_write_P(PSTR("LOWER\n"), false);
-			break;
-		case _ADJUST:
-			oled_write_P(PSTR("ADJ\n"), false);
-			break;
-	}
-}
+// __attribute__((weak)) void oled_task_user(void) {
+// 	oled_write_P(PSTR("\n\n"), false);
+// 	oled_write_ln_P(PSTR("LAYER"), false);
+// 	oled_write_ln_P(PSTR(""), false);
+// 	switch (get_highest_layer(layer_state)) {
+// 		case _BASE:
+// 			oled_write_P(PSTR("BASE\n"), false);
+// 			break;
+// 		case _RAISE:
+// 			oled_write_P(PSTR("RAISE\n"), false);
+// 			break;
+// 		case _LOWER:
+// 			oled_write_P(PSTR("LOWER\n"), false);
+// 			break;
+// 		case _ADJUST:
+// 			oled_write_P(PSTR("ADJ\n"), false);
+// 			break;
+// 	}
+// }
 
-#endif
+// #endif

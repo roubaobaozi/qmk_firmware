@@ -14,3 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "idobo.h"
+
+// void matrix_init_kb(void) {
+//     // put your keyboard start-up code here
+//     // runs once when the firmware starts up
+
+//     matrix_init_user();
+
+//     rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+//     rgblight_sethsv_range(HSV_GOLD, 0, RGBLED_NUM);
+// }
