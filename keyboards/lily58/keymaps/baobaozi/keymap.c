@@ -10,12 +10,12 @@
     #include "ssd1306.h"
 #endif
 
-#ifdef RGBLIGHT_ENABLE
-//Following line allows macro to read current RGB settings
-extern rgblight_config_t rgblight_config;
-#endif
+// #ifdef RGBLIGHT_ENABLE
+// //Following line allows macro to read current RGB settings
+// extern rgblight_config_t rgblight_config;
+// #endif
 
-extern uint8_t is_master;
+// extern uint8_t is_master;
 
 /* Re-pass though to allow templates to be used */
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
@@ -129,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // }
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
-#ifdef OLED_DRIVER_ENABLE
+#if defined(OLED_DRIVER_ENABLE)
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (!is_keyboard_master())
@@ -311,7 +311,7 @@ void oled_task_user(void) {
 //     return true;
 // }
 
-#ifdef ENCODER_ENABLE
+#if defined(ENCODER_ENABLE)
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) { /* First encoder */
         switch(get_highest_layer(layer_state)) {

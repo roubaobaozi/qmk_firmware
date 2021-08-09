@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define SSD1306OLED
 
 #define USE_SERIAL_PD2
+// #define USE_SERIAL
 
 // #define TAPPING_FORCE_HOLD
 // #define TAPPING_TERM 100
@@ -44,7 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define RGBLIGHT_VAL_STEP 17
 
 // Underglow
-#ifdef RGBLIGHT_ENABLE
+#if defined(RGBLIGHT_ENABLE)
 #   undef RGBLED_NUM
 #   undef RGBLIGHT_ANIMATIONS
 #   define RGBLED_NUM 12
@@ -68,7 +69,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 // Encoder
-#ifdef ENCODER_ENABLE
+#if defined(ENCODER_ENABLE)
     #define ENCODERS_PAD_A { F5 }
     #define ENCODERS_PAD_B { F4 }
     #define ENCODER_RESOLUTION 4
