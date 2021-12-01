@@ -104,34 +104,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // └─────────┴─────────┴─────────┴─────────┘     └─────────┘   └─────────┴─────────┘  └─────────┴─────────┘    └─────────┘    └─────────┴─────────┴─────────┴─────────┘
     ),
 };
-
-// doesn't work
-// #ifdef RGBLIGHT_ENABLE
-// static uint32_t rgb_timer = 0;
-
-// bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
-//     if (record->event.pressed) {
-//         rgb_timer = timer_read32(); // when you type again, reset the timer to let you know inactivity
-//     }
-
-//     if (timer_elapsed32(rgb_timer) > 60000) {
-//         rgblight_disable_noeeprom(); // turn off the underglow when there's inactivity
-
-//         return;
-//     } else {
-//         rgblight_enable_noeeprom();
-//     }
-
-//     return true;
-// }
-
-// void oled_task_user(void) { // should i be using some other function since redox doesn't have an OLED?
-//     if (timer_elapsed32(rgb_timer) > 60000) {
-//         rgblight_disable_noeeprom(); // turn off the underglow when there's inactivity
-
-//         return;
-//     } else {
-//         rgblight_enable_noeeprom();
-//     }
-// }
-// #endif

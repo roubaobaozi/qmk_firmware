@@ -183,7 +183,7 @@ static void render_status(void) {
 //     return true;
 // }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     // if (timer_elapsed32(oled_timer) > 60000) {
     //     oled_off();
     //     rgblight_disable_noeeprom();
@@ -203,5 +203,7 @@ void oled_task_user(void) {
             oled_scroll_left();
         }
     // }
+
+    return false;
 }
 #endif

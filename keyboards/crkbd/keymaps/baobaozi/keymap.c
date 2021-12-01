@@ -27,6 +27,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             // └─────────┴─────────┴─────────┘       └─────────┴─────────┴─────────┘
     ),
 
+    // [_XIN] = LAYOUT_wrapper(
+    //     // ┌─ Extra ─┬─── Q ───┬─── W ───┬─── F ───┬─── P ───┬─── G ───┐                   ┌─── J ───┬─── L ───┬─── U ───┬─── Y ───┬─── ; ───┬─ Extra ─┐
+    //         _______  ,_________________ROW_TOP_XIN_L___________________,                    _________________ROW_TOP_XIN_R___________________,_______  ,
+    //     // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    //         _______  ,_________________ROW_MID_XIN_L___________________,                    _________________ROW_MID_XIN_R___________________,_______  ,
+    //     // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    //         _______  ,_________________ROW_BOT_XIN_L___________________,                    _________________ROW_BOT_XIN_R___________________,_______  ,
+    //     // └─────────┴─────────┴─────────┴─────┬───┴─────┬───┴─────┬───┴─────┐       ┌─────┴───┬─────┴───┬─────┴───┬─────┴─────────┴─────────┴─────────┘
+    //                                             _______  ,MA(QUOT) ,MG(A)    ,        _______  ,_______  ,_______
+    //                                         // └─────────┴─────────┴─────────┘       └─────────┴─────────┴─────────┘
+    // ),
+
     [_QWERTY] = LAYOUT_wrapper(
         // ┌─ Extra ─┬─── Q ───┬─── W ───┬─── F ───┬─── P ───┬─── G ───┐                   ┌─── J ───┬─── L ───┬─── U ───┬─── Y ───┬─── ; ───┬─ Extra ─┐
             _______  ,_________________ROW_TOP_QWERT_L_________________,                    _________________ROW_TOP_QWERT_R_________________,_______  ,
@@ -47,10 +59,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
             _______  ,_________________ROW_BOT_NAV_L___________________,                    _________________ROW_BOT_NAV_R___________________,_______  ,
         // └─────────┴─────────┴─────────┴─────┬───┴─────┬───┴─────┬───┴─────┐       ┌─────┴───┬─────┴───┬─────┴───┬─────┴─────────┴─────────┴─────────┘
-                                                _______  ,_______  ,_______  ,        _______  ,KC_F     ,KC_ENT
+                                                _______  ,_______  ,_______  ,        _______  ,_______  ,_______
                                             // └─────────┴─────────┴─────────┘       └─────────┴─────────┴─────────┘
     ),
 
+#if defined(BILATERAL_COMBINATIONS2)
+    [_NSY] = LAYOUT_wrapper(
+        // ┌─ Extra ─┬─── Q ───┬─── W ───┬─── F ───┬─── P ───┬─── G ───┐                   ┌─── J ───┬─── L ───┬─── U ───┬─── Y ───┬─── ; ───┬─ Extra ─┐
+            _______  ,_________________ROW_TOP_NSY_L___________________,                    _________________ROW_TOP_NSY_R___________________,_______  ,
+        // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+            _______  ,_________________ROW_MID_NSY_L___________________,                    _________________ROW_MID_NSY_R___________________,_______  ,
+        // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+            _______  ,_________________ROW_BOT_NSY_L___________________,                    _________________ROW_BOT_NSY_R___________________,_______  ,
+        // └─────────┴─────────┴─────────┴─────┬───┴─────┬───┴─────┬───┴─────┐       ┌─────┴───┬─────┴───┬─────┴───┬─────┴─────────┴─────────┴─────────┘
+                                                _______  ,_______  ,_______  ,        _______  ,_______  ,_______
+                                            // └─────────┴─────────┴─────────┘       └─────────┴─────────┴─────────┘
+    ),
+#else
     [_SYM] = LAYOUT_wrapper(
         // ┌─ Extra ─┬─── Q ───┬─── W ───┬─── F ───┬─── P ───┬─── G ───┐                   ┌─── J ───┬─── L ───┬─── U ───┬─── Y ───┬─── ; ───┬─ Extra ─┐
             _______  ,_________________ROW_TOP_SYM_L___________________,                    _________________ROW_TOP_SYM_R___________________,_______  ,
@@ -71,9 +96,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
             _______  ,_________________ROW_BOT_NUM_L___________________,                    _________________ROW_BOT_NUM_R___________________,_______  ,
         // └─────────┴─────────┴─────────┴─────┬───┴─────┬───┴─────┬───┴─────┐       ┌─────┴───┬─────┴───┬─────┴───┬─────┴─────────┴─────────┴─────────┘
-                                                _______  ,_______  ,_______  ,        _______  ,KC_0     ,KC_DOT
+                                                _______  ,_______  ,_______  ,        _______  ,_______  ,_______
                                             // └─────────┴─────────┴─────────┘       └─────────┴─────────┴─────────┘
     ),
+#endif
 
     [_CUR] = LAYOUT_wrapper(
         // ┌─ Extra ─┬─── Q ───┬─── W ───┬─── F ───┬─── P ───┬─── G ───┐                   ┌─── J ───┬─── L ───┬─── U ───┬─── Y ───┬─── ; ───┬─ Extra ─┐
@@ -120,7 +146,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef OLED_ENABLE
 static uint32_t oled_timer = 0;
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_270;
+    } else {
+        return OLED_ROTATION_180;
+    }
+}
 
 // void render_space(void) {
 //     oled_write_P(PSTR("\n"), false);
@@ -288,14 +320,21 @@ void render_layer_state(void) {
         oled_write_P(PSTR("\n CUR\n sor\n"), false);
     } else if(layer_state_is(_KB)) {
         oled_write_P(PSTR("\n KB\n act\n"), false);
+#if defined(BILATERAL_COMBINATIONS2)
+    } else if(layer_state_is(_NSY)) {
+        oled_write_P(PSTR("\n NSY\n 1()\n"), false);
+#else
     } else if(layer_state_is(_NUM)) {
         oled_write_P(PSTR("\n NUM\n 123\n"), false);
     } else if(layer_state_is(_SYM)) {
         oled_write_P(PSTR("\n SYM\n !@#\n"), false);
+#endif
     } else if(layer_state_is(_NAV)) {
         oled_write_P(PSTR("\n NAV\n mov\n"), false);
     } else if(layer_state_is(_QWERTY)) {
         oled_write_P(PSTR("\n QWE\n sux\n"), false);
+    // } else if(layer_state_is(_XIN)) {
+    //     oled_write_P(PSTR("\n XIN\n ooo\n"), false);
     } else {
         oled_write_P(PSTR("\n CMK\n yay\n"), false);
     }
@@ -381,7 +420,8 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
+// void oled_task_user(void) {
     if (timer_elapsed32(oled_timer) > 60000) { // turn off OLED due to inactivity, to preserve OLED life. also turn off RGB.
         rgb_matrix_disable_noeeprom();
         // rgblight_disable_noeeprom();
@@ -398,10 +438,12 @@ void oled_task_user(void) {
         // if (is_keyboard_master()) {
             render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
         } else {
-            oled_write_P(PSTR("corneis\ngreat\ncole\nmak\nis\ngreat\nqmk\nis\ngreat\nyay\n\n"), false);
-            oled_scroll_left();
+            oled_write_P(PSTR("QMK is a pathway to\nmany abilities some\nconsider to be ...\nunnatural\n"), false);
+            // oled_scroll_left();
         }
     }
+
+    return false;
 }
 
 #endif

@@ -33,6 +33,10 @@
 #    undef RETRO_TAPPING
 #endif
 
+// Might save some space
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+
 // How long to hold an LT before it does the "held" rather than "tap" keY
 #ifdef TAPPING_TERM
 #    undef TAPPING_TERM
@@ -93,10 +97,11 @@
 #define COMBO_TERM 35
 #define COMBO_TERM_PER_COMBO
 #define EXTRA_SHORT_COMBOS
-// #define COMBO_ONLY_FROM_LAYER 0
+#define COMBO_ONLY_FROM_LAYER 0 // only base layer combos exist
 
 // i still don't really like home row mods lol
-// #define BILATERAL_COMBINATIONS 180
+// however, bottom row mods are the bomb!
+// #define BILATERAL_COMBINATIONS 170
 
 // #define ARSTNEIO_ENABLE
 

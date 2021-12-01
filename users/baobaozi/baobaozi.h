@@ -15,11 +15,16 @@ enum userspace_layers {
     // NEW_SAFE_RANGE,  // use "NEW_SAFE_RANGE" for keymap specific codes
     _COLEMAK = 0,
     _QWERTY,
+    // _XIN,
     _NAV,
     _SYM,
+#if defined(BILATERAL_COMBINATIONS2)
+    _NSY,
+#else
     _NUM,
-    _KB,
+#endif
     _CUR,
+    _KB,
 };
 
 #if defined(TAP_DANCE_ENABLE)

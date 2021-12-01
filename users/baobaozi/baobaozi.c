@@ -9,6 +9,15 @@ uint16_t last_registered;
 
 __attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t *record) { return true; }
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+#if defined(CAPS_WORD)
+        extern bool process_caps_word(uint16_t keycode, keyrecord_t *record);
+        if (!process_caps_word(keycode, record)) {
+            return false;
+        }
+#endif
+    }
+
     uint8_t active_mods = get_mods();
     uint8_t active_oneshot_mods = get_oneshot_mods();
 
@@ -57,6 +66,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         //         return false;
         //     }
         //     break;
+        case MS(F23):
+            // shift modtap on LT
+            if (record->tap.count > 0 && record->event.pressed) {
+                tap_code16(KC_LT);
+            }
+            break;
         case MJSPL:
             if (record->event.pressed) {
                 // when keycode is pressed, type out ${} and position caret in between {}
@@ -91,6 +106,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_SLSH);
             }
             break;
+#if defined(BILATERAL_COMBINATIONS2)
+        case KC_LPRN:
+            if (
+                record->event.pressed
+                    && (active_mods & MOD_MASK_SHIFT
+                        || active_oneshot_mods & MOD_MASK_SHIFT)
+            ) {
+                tap_code16(KC_RPRN);
+            }
+            break;
+        case KC_LBRC:
+            if (
+                record->event.pressed
+                    && (active_mods & MOD_MASK_SHIFT
+                        || active_oneshot_mods & MOD_MASK_SHIFT)
+            ) {
+                clear_mods(); // get rid of shift
+                clear_oneshot_mods();
+                tap_code16(KC_RBRC);
+                set_mods(active_mods); // put it all back to normal
+            }
+            break;
+        case KC_LCBR:
+            if (
+                record->event.pressed
+                    && (active_mods & MOD_MASK_SHIFT
+                        || active_oneshot_mods & MOD_MASK_SHIFT)
+            ) {
+                tap_code16(KC_RCBR);
+            }
+            break;
+        case KC_LT:
+            if (
+                record->event.pressed
+                    && (active_mods & MOD_MASK_SHIFT
+                        || active_oneshot_mods & MOD_MASK_SHIFT)
+            ) {
+                tap_code16(KC_GT);
+            }
+            break;
+#endif
     //     case MCSG4: // eh, just keep this here so i can refer to it if i wanted to have a send_string macro
     //         if (record->event.pressed) {
     //             // when keycode is pressed, screenshot portion of window to clipboard
@@ -190,6 +246,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     return process_record_keymap(keycode, record);
 };
+
+#if defined(KEY_OVERRIDE_ENABLE)
+const key_override_t or_lprn = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_RPRN);
+const key_override_t or_lcbr = ko_make_basic(MOD_MASK_SHIFT, KC_LCBR, KC_RCBR);
+const key_override_t or_lbrc = ko_make_basic(MOD_MASK_SHIFT, KC_LBRC, KC_RBRC);
+const key_override_t or_lt = ko_make_basic(MOD_MASK_SHIFT, KC_LT, KC_GT);
+
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &or_lprn,
+    &or_lcbr,
+    &or_lbrc,
+    &or_lt,
+    NULL // Null terminate the array of overrides!
+};
+#endif
 
 #ifdef LEADER_DICTIONARY
 void matrix_scan_user(void) {

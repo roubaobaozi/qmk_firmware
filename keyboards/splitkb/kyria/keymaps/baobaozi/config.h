@@ -16,7 +16,7 @@
 
 #pragma once
 
-#if defined(OLED_DRIVER_ENABLE)
+#if defined(OLED_ENABLE)
 #   define OLED_DISPLAY_128X64
 #endif
 

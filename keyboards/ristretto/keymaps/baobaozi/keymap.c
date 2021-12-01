@@ -105,7 +105,7 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
 }
 #endif
 
-#if defined(OLED_DRIVER_ENABLE)
+#if defined(OLED_ENABLE)
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_270;
 }
@@ -120,7 +120,7 @@ void render_mod_status(uint8_t modifiers) {
     oled_write_P(led_state.caps_lock ? PSTR(">cap\n") : PSTR(" cap\n"), false);
 }
 
-__attribute__((weak)) void oled_task_user(void) {
+bool oled_task_user(void) {
     if(layer_state_is(_KB)) {
         oled_write_P(PSTR("\n KB\n act\n"), false);
     } else if(layer_state_is(_CUR)) {
@@ -139,5 +139,7 @@ __attribute__((weak)) void oled_task_user(void) {
 
     oled_write_P(PSTR(" --- \n"), false);
     render_mod_status(get_mods()|get_oneshot_mods());
+
+    return false;
 }
 #endif

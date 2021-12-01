@@ -2,22 +2,25 @@
 
 enum combo_events {
     CHD_TGNAV,
+    // CHD_TGXIN,
     CHD_TAB,
     CHD_GRV,
     CHD_ENT,
-    // CHD_NUMENT,
+    CHD_ENTNAV,
     CHD_ESC,
     // CHD_APO,
-    CHD_OSS,
-    CHD_OSSL,
+    // CHD_OSS,
+    // CHD_OSSL,
     CHD_BSPC,
     CHD_BSPCQWE,
-    CHD_BSPCPRI,
-    CHD_BSPCSEC,
-    CHD_BSPCTER,
+    CHD_BSPCNAV,
+    CHD_BSPCSYM,
+    CHD_BSPCNUM,
+    CHD_CAPS,
     CHD_CLR,
     CHD_LKB,
     CHD_QWER,
+    // CHD_NSY,
     CHD_F6,
     CHD_F7,
     CHD_F8,
@@ -79,35 +82,54 @@ enum combo_events {
 #endif
 };
 
+#if defined(BILATERAL_COMBINATIONS2)
+const uint16_t PROGMEM tab_combo[] = {MG(M), MA(COMM), COMBO_END};
+const uint16_t PROGMEM grv_combo[] = {MA(C), MG(V), COMBO_END};
+const uint16_t PROGMEM ent_combo[] = {MA(COMM), MC(DOT), COMBO_END};
+const uint16_t PROGMEM entnav_combo[] = {AG(UP), AG(DOWN), COMBO_END};
+// const uint16_t PROGMEM nument_combo[] = {KC_2, KC_3, COMBO_END}; // still be able to hit enter with the same spot as default layer … though I usually don’t. Maybe turn off?
+const uint16_t PROGMEM esc_combo[] = {KC_SLSH, MG(M), COMBO_END};
+const uint16_t PROGMEM tgnav_combo[] = {KC_SCLN, KC_O, KC_SLSH, COMBO_END}; // for when I watch TV
+const uint16_t PROGMEM caps_combo[] = {MG(V), MG(M), COMBO_END}; // Add capslock to a combo for easy access
+const uint16_t PROGMEM clr_combo[] = {MA(C), MA(COMM), COMBO_END}; // reutilising for clearing one shots
+const uint16_t PROGMEM lkb_combo[] = {KC_Z, MC(X), COMBO_END};
+#else
 const uint16_t PROGMEM tab_combo[] = {KC_M, KC_COMM, COMBO_END};
 const uint16_t PROGMEM grv_combo[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM ent_combo[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM entnav_combo[] = {AG(UP), AG(DOWN), COMBO_END};
 // const uint16_t PROGMEM nument_combo[] = {KC_2, KC_3, COMBO_END}; // still be able to hit enter with the same spot as default layer … though I usually don’t. Maybe turn off?
 const uint16_t PROGMEM esc_combo[] = {MS(SLSH), KC_M, COMBO_END};
 const uint16_t PROGMEM tgnav_combo[] = {KC_SCLN, KC_O, MS(SLSH), COMBO_END}; // for when I watch TV
-// const uint16_t PROGMEM apo_combo[] = {KC_P, KC_T, COMBO_END}; // vertical combo works well on DSA, but it a bit troublesome on OEM
-#ifdef BILATERAL_COMBINATIONS
-const uint16_t PROGMEM oss_combo[] = {MS(N), MG(E), MA(I), COMBO_END}; // one shot shift in same spot both hands, so depending on which letter next you need to shift
-const uint16_t PROGMEM ossl_combo[] = {MA(R), MG(S), MS(T), COMBO_END}; // left hand mirror here
-#else
-const uint16_t PROGMEM oss_combo[] = {KC_N, KC_E, KC_I, COMBO_END}; // one shot shift in same spot both hands, so depending on which letter next you need to shift
-const uint16_t PROGMEM ossl_combo[] = {KC_R, KC_S, KC_T, COMBO_END}; // left hand mirror here
-#endif
-const uint16_t PROGMEM bspc_combo[] = {KC_U, KC_Y, COMBO_END}; // trial backspace in combo
-const uint16_t PROGMEM bspcqwe_combo[] = {KC_U, KC_I, KC_O, COMBO_END}; // trial backspace in combo in qwerty layer
-const uint16_t PROGMEM bspcpri_combo[] = {KC_PGUP, KC_PGDN, COMBO_END}; // trial backspace in combo in primary layer
-const uint16_t PROGMEM bspcsec_combo[] = {KC_RPRN, AA(MINS), COMBO_END}; // trial backspace in combo in secondary layer
-// const uint16_t PROGMEM bspcsec_combo[] = {KC_RPRN, KC_QUOT, COMBO_END}; // trial backspace in combo in secondary layer change back to quot?
-// const uint16_t PROGMEM bspcsec_combo[] = {KC_LBRC, KC_RBRC, KC_QUOT, COMBO_END}; // trial backspace in combo in secondary layer
-const uint16_t PROGMEM bspcter_combo[] = {KC_8, KC_9, COMBO_END}; // trial backspace in combo in tertiary layer
+const uint16_t PROGMEM caps_combo[] = {KC_V, KC_M, COMBO_END}; // Add capslock to a combo for easy access
 const uint16_t PROGMEM clr_combo[] = {KC_C, KC_COMM, COMBO_END}; // reutilising for clearing one shots
 const uint16_t PROGMEM lkb_combo[] = {MS(Z), LT0(X), COMBO_END};
+#endif
+
+// const uint16_t PROGMEM tgxin_combo[] = {KC_A, KC_O, COMBO_END}; // Trial XIN layout
+// const uint16_t PROGMEM apo_combo[] = {KC_P, KC_T, COMBO_END}; // vertical combo works well on DSA, but it a bit troublesome on OEM
+// #ifdef BILATERAL_COMBINATIONS
+// const uint16_t PROGMEM oss_combo[] = {MS(N), MG(E), MA(I), COMBO_END}; // one shot shift in same spot both hands, so depending on which letter next you need to shift
+// const uint16_t PROGMEM ossl_combo[] = {MA(R), MG(S), MS(T), COMBO_END}; // left hand mirror here
+// #else
+// const uint16_t PROGMEM oss_combo[] = {KC_N, KC_E, KC_I, COMBO_END}; // one shot shift in same spot both hands, so depending on which letter next you need to shift
+// const uint16_t PROGMEM ossl_combo[] = {KC_R, KC_S, KC_T, COMBO_END}; // left hand mirror here
+// #endif
+const uint16_t PROGMEM bspc_combo[] = {KC_U, KC_Y, COMBO_END}; // trial backspace in combo
+const uint16_t PROGMEM bspcqwe_combo[] = {KC_U, KC_I, KC_O, COMBO_END}; // trial backspace in combo in qwerty layer
+const uint16_t PROGMEM bspcnav_combo[] = {KC_PGUP, KC_PGDN, COMBO_END}; // trial backspace in combo in primary layer
+const uint16_t PROGMEM bspcsym_combo[] = {KC_RPRN, AA(MINS), COMBO_END}; // trial backspace in combo in secondary layer
+// const uint16_t PROGMEM bspcsym_combo[] = {KC_RPRN, KC_QUOT, COMBO_END}; // trial backspace in combo in secondary layer change back to quot?
+// const uint16_t PROGMEM bspcsym_combo[] = {KC_LBRC, KC_RBRC, KC_QUOT, COMBO_END}; // trial backspace in combo in secondary layer
+const uint16_t PROGMEM bspcnum_combo[] = {KC_8, KC_9, COMBO_END}; // trial backspace in combo in tertiary layer
+
 const uint16_t PROGMEM qwer_combo[] = {LTN(Q), LTS(W), KC_E, KC_R, COMBO_END}; // qwerty
 const uint16_t PROGMEM f6_combo[] = {KC_F1, KC_F2, COMBO_END};
 const uint16_t PROGMEM f7_combo[] = {KC_F2, KC_F3, COMBO_END};
 const uint16_t PROGMEM f8_combo[] = {KC_F3, KC_F4, COMBO_END};
 const uint16_t PROGMEM f9_combo[] = {KC_F4, KC_F5, COMBO_END};
 const uint16_t PROGMEM f10_combo[] = {KC_F2, KC_F3, KC_F4, COMBO_END};
+// const uint16_t PROGMEM nsy_combo[] = {__T_L1___, __T_R1___, COMBO_END}; // num-sym
 
 #if defined(UNICODEMAP_ENABLE) || defined(UNICODE_ENABLE)
 const uint16_t PROGMEM emo_combo[] = {KC_L, KC_SCLN, COMBO_END};
@@ -161,17 +183,20 @@ combo_t key_combos[] = {
     [CHD_TAB] = COMBO(tab_combo, KC_TAB),
     [CHD_GRV] = COMBO(grv_combo, KC_GRV),
     [CHD_ENT] = COMBO(ent_combo, KC_ENT),
+    [CHD_ENTNAV] = COMBO(entnav_combo, KC_ENT),
     // [CHD_NUMENT] = COMBO(nument_combo, KC_ENT),
     [CHD_ESC] = COMBO(esc_combo, KC_ESC),
     [CHD_TGNAV] = COMBO(tgnav_combo, TGNAV),
+    // [CHD_TGXIN] = COMBO(tgxin_combo, TGXIN),
     // [CHD_APO] = COMBO(apo_combo, A(S(KC_RBRC))),
-    [CHD_OSS] = COMBO(oss_combo, OS(LSFT)),
-    [CHD_OSSL] = COMBO(ossl_combo, OS(LSFT)),
+    // [CHD_OSS] = COMBO(oss_combo, OS(LSFT)),
+    // [CHD_OSSL] = COMBO(ossl_combo, OS(LSFT)),
     [CHD_BSPC] = COMBO(bspc_combo, KC_BSPC),
     [CHD_BSPCQWE] = COMBO(bspcqwe_combo, KC_BSPC),
-    [CHD_BSPCPRI] = COMBO(bspcpri_combo, KC_BSPC),
-    [CHD_BSPCSEC] = COMBO(bspcsec_combo, KC_BSPC),
-    [CHD_BSPCTER] = COMBO(bspcter_combo, KC_BSPC),
+    [CHD_BSPCNAV] = COMBO(bspcnav_combo, KC_BSPC),
+    [CHD_BSPCSYM] = COMBO(bspcsym_combo, KC_BSPC),
+    [CHD_BSPCNUM] = COMBO(bspcnum_combo, KC_BSPC),
+    [CHD_CAPS] = COMBO(caps_combo, KC_CAPS),
     [CHD_CLR] = COMBO_ACTION(clr_combo),
     [CHD_LKB] = COMBO(lkb_combo, OSL(_KB)),
     [CHD_QWER] = COMBO(qwer_combo, TGQWER),
@@ -180,6 +205,7 @@ combo_t key_combos[] = {
     [CHD_F8] = COMBO(f8_combo, KC_F8),
     [CHD_F9] = COMBO(f9_combo, KC_F9),
     [CHD_F10] = COMBO(f10_combo, KC_F10),
+    // [CHD_NSY] = COMBO(nsy_combo, OSL(_NSY)),
 #if defined(UNICODEMAP_ENABLE) || defined(UNICODE_ENABLE)
     [CHD_EMO] = COMBO(emo_combo, OSL(_EMO)),
 #endif
@@ -263,11 +289,15 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     // }
     // or with combo index, i.e. its name from enum.
     switch (index) {
-        case CHD_OSS:
-        case CHD_OSSL:
-        case CHD_TGNAV:
+        // case CHD_OSS:
+        // case CHD_OSSL:
         // case CHD_BSPC:
+        case CHD_TGNAV:
             return COMBO_TERM + 10;
+
+        case CHD_BSPC:
+        case CHD_BSPCQWE:
+            return COMBO_TERM - 5;
 
         default:
             return COMBO_TERM;
