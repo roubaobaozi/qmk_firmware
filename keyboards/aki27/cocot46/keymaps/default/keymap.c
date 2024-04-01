@@ -31,8 +31,8 @@ enum layer_number {
 };
 
 
-#define LW_MHEN LT(1,KC_MHEN)  // lower
-#define RS_HENK LT(2,KC_HENK)  // raise
+#define LW_MHEN LT(1,KC_SPC)  // lower
+#define RS_HENK LT(2,KC_SPC)  // raise
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_MS_BTN1,               KC_MS_BTN2,      KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_MINS,
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
-                        KC_LGUI, KC_LALT, LW_MHEN,  KC_SPC,      KC_PGUP,  KC_MS_BTN3,   KC_PGDOWN,    KC_ENT, RS_HENK, KC_BSPC,  KC_DEL
+                        KC_LGUI, KC_LALT, LW_MHEN,  KC_SPC,      KC_PGUP,  KC_MS_BTN3,   KC_PGDN,      KC_ENT, RS_HENK, KC_BSPC,  KC_DEL
                                                     //`-----------------------'  `-----------------------'
     ),
     [1] = LAYOUT(
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
       KC_LSFT,  KC_GRV, KC_TILD, KC_NUBS, KC_PIPE, XXXXXXX,   KC_MS_BTN4,               KC_MS_BTN5,    KC_EQL, KC_PLUS, KC_LABK, KC_RABK, KC_QUES, KC_UNDS,
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
-                        KC_LGUI, KC_LALT, KC_TRNS,  KC_SPC,      KC_PGUP,  KC_MS_BTN3,   KC_PGDOWN,    KC_ENT,   TT(3), KC_BSPC,  KC_DEL
+                        KC_LGUI, KC_LALT, KC_TRNS,  KC_SPC,      KC_PGUP,  KC_MS_BTN3,   KC_PGDN,      KC_ENT,   TT(3), KC_BSPC,  KC_DEL
                                                     //`-----------------------'  `-----------------------'
     ),
     [2] = LAYOUT(
@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
       KC_LSFT,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,   KC_MS_BTN4,               KC_MS_BTN5,   XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
-                        KC_LGUI, KC_LALT,   TT(3),  KC_SPC,      KC_PGUP,  KC_MS_BTN3,   KC_PGDOWN,    KC_ENT, KC_TRNS, KC_BSPC,  KC_DEL
+                        KC_LGUI, KC_LALT,   TT(3),  KC_SPC,      KC_PGUP,  KC_MS_BTN3,   KC_PGDN,      KC_ENT, KC_TRNS, KC_BSPC,  KC_DEL
                                                     //`-----------------------'  `-----------------------'
     ),
     [3] = LAYOUT(
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_MS_BTN1,               KC_MS_BTN2,  RGB_RMOD,   RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,
   //|-------------------------------------------------------|                                       |-------------------------------------------------------|
-                        XXXXXXX, XXXXXXX, KC_TRNS, XXXXXXX,      KC_PGUP,  KC_MS_BTN3,   KC_PGDOWN,   XXXXXXX,   KC_TRNS, XXXXXXX, XXXXXXX
+                        XXXXXXX, XXXXXXX, KC_TRNS, XXXXXXX,      KC_PGUP,  KC_MS_BTN3,   KC_PGDN,     XXXXXXX,   KC_TRNS, XXXXXXX, XXXXXXX
                                                     //`-----------------------'  `-----------------------'
     )
 };
@@ -120,18 +120,6 @@ void matrix_scan_user(void) {
     static bool paw_ready;
 
     report_mouse_t mouse_rep = pointing_device_get_report();
-
-    if (IS_PRESSED(encoder1_ccw)) {
-        encoder1_ccw.pressed = false;
-        encoder1_ccw.time = (timer_read() | 1);
-        action_exec(encoder1_ccw);
-    }
-
-    if (IS_PRESSED(encoder1_cw)) {
-        encoder1_cw.pressed = false;
-        encoder1_cw.time = (timer_read() | 1);
-        action_exec(encoder1_cw);
-    }
 
     if (cnt++ % 50 == 0) {
         uint8_t pid = read_pid_paw3204();

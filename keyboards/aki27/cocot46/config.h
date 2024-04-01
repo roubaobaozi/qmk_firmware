@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
+// #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID    0xFEED
-#define PRODUCT_ID   0x0000
-#define DEVICE_VER   0x0001
-#define MANUFACTURER aki27
-#define PRODUCT      cocot46
+// #define VENDOR_ID    0xFEED
+// #define PRODUCT_ID   0x0000
+// #define DEVICE_VER   0x0001
+// #define MANUFACTURER aki27
+// #define PRODUCT      cocot46
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -41,23 +41,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5
 
-/* disable these deprecated features by default */
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
-
 /* Rotary encoder */
 #define ENCODERS_PAD_A { D4 }
 #define ENCODERS_PAD_B { C6 }
 #define ENCODER_RESOLUTION 4
 
-
-#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 200
-
-#define RGB_DI_PIN D3
+#define WS2812_DI_PIN D3
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
-    #define RGBLIGHT_ANIMATIONS
     #define RGBLED_NUM 10
     #define RGBLIGHT_LIMIT_VAL 120
     #define RGBLIGHT_HUE_STEP 10
